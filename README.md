@@ -7,7 +7,7 @@ CPMonitor  displays basic system information through tkinker GUI such as:
 2) CPU information (Brand, load, speed, cores/core breakdown)
 3) Memory (installed, available and used)
 4) Mounted Drives (Mounted letter, Type, Size)
-5) GPU Information (Brand, memory, load, temp)
+5) Nvidia GPU Information (Brand, memory, load, temp)
 
 ## Required packages
 CPmonitor uses the following packages:
