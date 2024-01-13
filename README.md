@@ -1,7 +1,7 @@
 # CPmonitor
 
 ## What is CPmonitor?
-CPmonitor  displays basic system information through tkinker GUI such as:
+CPmonitor displays basic system information through tkinker GUI such as:
 
 1) Device Details (Name, OS and version)
 2) CPU information (Brand, load, speed, cores/core breakdown)
