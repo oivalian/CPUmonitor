@@ -1,7 +1,7 @@
-# CPmonitor
+# CPUmonitor
 
-## What is CPmonitor?
-CPmonitor displays basic system information through tkinker GUI such as:
+## What is CPUmonitor?
+CPUmonitor displays basic system information through tkinker GUI such as:
 
 1) Device Details (Name, OS and version)
 2) CPU information (Brand, load, speed, cores/core breakdown)
@@ -10,7 +10,7 @@ CPmonitor displays basic system information through tkinker GUI such as:
 5) Nvidia GPU Information (Brand, memory, load, temp)
 
 ## Required libraries
-CPmonitor uses the following libraries:
+CPUmonitor uses the following libraries:
 `psutil`
 `py-cpuinfo`
 `GPUtil`
@@ -28,7 +28,7 @@ CPmonitor uses the following libraries:
 - More hardware information
 
 > [!NOTE]
-> There are probably much better ways of presenting this, but as it evolves and my skills improve, CPmonitor will also.
+> There are probably much better ways of presenting this, but as it evolves and my skills improve, CPUmonitor will also.
 
 ### Creating the executable
 1) Ensure you have the prerequisite libraries imported
@@ -37,7 +37,7 @@ CPmonitor uses the following libraries:
 4) Ensure the .ico file is saved in the root dir
 5) Run the following command:
    
-``` pyinstaller -w --onefile --icon=icon.ico --add-data=icon.ico:. cpmonitor.py ```
+``` pyinstaller -w --onefile --icon=icon.ico --add-data=icon.ico:. cpumonitor.py ```
 
 6) Your executable will be saved under the ```./dist``` dir
    
