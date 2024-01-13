@@ -12,13 +12,13 @@ if __name__ == "__main__":
     root = ttk.Window(themename='darkly')
     iconPath = resource_path('icon.ico')
     root.iconbitmap(iconPath)
-    root.title("CPmonitor")
+    root.title("CPUMonitor")
     root.geometry("1200x1200")
     root.minsize(1200, 1200)
 
     '''
-    replace lines 63-70 in passwordgenerator.py with the above code
+    replace lines 63-70 in cpumonitor.py with the above code
 
     run command:
-    pyinstaller -w --onefile --icon=icon.ico --add-data=icon.ico:. cpmonitor.py
+    pyinstaller -w --onefile --icon=icon.ico --add-data=icon.ico:. cpumonitor.py
     '''
