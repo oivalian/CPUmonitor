@@ -12,7 +12,7 @@ if __name__ == "__main__":
     root = ttk.Window(themename='darkly')
     iconPath = resource_path('icon.ico')
     root.iconbitmap(iconPath)
-    root.title("CPUMonitor")
+    root.title("CPUmonitor")
     root.geometry("1200x1200")
     root.minsize(1200, 1200)
 
