@@ -9,13 +9,17 @@ CPmonitor  displays basic system information through tkinker GUI such as:
 4) Mounted Drives (Mounted letter, Type, Size)
 5) Nvidia GPU Information (Brand, memory, load, temp)
 
-## Required packages
-CPmonitor uses the following packages:
+## Required libraries
+CPmonitor uses the following libraries:
 `psutil`
 `py-cpuinfo`
 `GPUtil`
 `tkinter`
 `ttkbootstrap`
+`platform`
+`multiprocessing`
+`sys`
+`os`
 
 ## Planned addons
 
@@ -28,11 +32,10 @@ CPmonitor uses the following packages:
 > There are probably much better ways of presenting this, but as it evolves and my skills improve, CPmonitor will also.
 
 ### Creating the executable
-1) Ensure you have the prerequisite packages installed (psutil, py-cpuinfo, GPUtil, tkinter, ttkbootstrap, pyinstaller)
-2) ```import os```, ```import sys```
-3) Access the ```MEIPASS.py``` file. Replace the lines in the original .py file.
-4) Ensure the .ico file is saved in the root dir
-5) Run the following command:
+1) Ensure you have the prerequisite libraries imported
+2) Access the ```MEIPASS.py``` file. Replace the lines in the original .py file.
+3) Ensure the .ico file is saved in the root dir
+4) Run the following command:
    
 ``` pyinstaller -w --onefile --icon=icon.ico --add-data=icon.ico:. cpmonitor.py ```
 
