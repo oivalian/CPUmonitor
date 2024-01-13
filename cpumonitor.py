@@ -63,7 +63,7 @@ if __name__=="__main__":
     # root
     multiprocessing.freeze_support()
     root = ttk.Window(themename="darkly")
-    root.title("CPmonitor")
+    root.title("CPUmonitor")
     root.iconbitmap("icon.ico")
     root.geometry("1200x1200")
     root.minsize(1200, 1200)
