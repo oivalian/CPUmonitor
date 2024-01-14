@@ -8,7 +8,7 @@ import os
 
 
 def cpu_core_list():
-    return [f"Core #{core} Load: {perc}%{os.linesep}"
+    return [f"CPU Core #{core}: {perc}%{os.linesep}"
             for core, perc in enumerate(ps.cpu_percent(percpu=True, interval=1))]
 
 
@@ -65,8 +65,8 @@ if __name__=="__main__":
     root = ttk.Window(themename="darkly")
     root.title("CPUmonitor")
     root.iconbitmap("icon.ico")
-    root.geometry("1200x1200")
-    root.minsize(1200, 1200)
+    root.geometry("")
+    root.resizable(False, False)
     
     
     # content
@@ -172,7 +172,7 @@ if __name__=="__main__":
     cpu_cores_frame = ttk.Frame(root)
     
     # CPU cores list title
-    cpu_cores_title = ttk.Label(cpu_cores_frame, text="CPU Cores", font="Verdana 12 bold")
+    cpu_cores_title = ttk.Label(cpu_cores_frame, text="CPU Core Loads", font="Verdana 12 bold")
     
     # CPU Cores Usage
     cpu_coreInfo_var = ttk.StringVar()
@@ -192,15 +192,21 @@ if __name__=="__main__":
     
     # -- PACKAGE --
     # System Information Package
-    sys_frame.grid(row=1, column=1, sticky="nsew")
+    sys_frame.grid(row=1, column=1, sticky="nsew", pady=20, padx=30)
     sys_title.pack(pady=10, anchor="w")
     sys_name_label.pack(anchor="w")
     sys_osinfo_label.pack(anchor="w")
     sys_vers_label.pack(anchor="w")
+
     
+    # Drive Package
+    drive_frame.grid(row=2, column=1, sticky="nsew", pady=20, padx=30)
+    drive_title.pack(pady=10, anchor="w")
+    drive_label.pack(anchor="w")
+
     
     # CPU Package
-    cpu_frame.grid(row=1, column=2, sticky="nsew")
+    cpu_frame.grid(row=1, column=2, sticky="nsew", pady=20, padx=20)
     cpu_title.pack(pady=10, anchor="w")
     cpu_model_label.pack(anchor="w")
     cpu_speeds_label.pack(anchor="w")
@@ -209,36 +215,30 @@ if __name__=="__main__":
     
     
     # CPU Cores Package
-    cpu_cores_frame.grid(row=2, column=2, sticky="nsew")
+    cpu_cores_frame.grid(row=2, column=2, sticky="nsew", pady=20, padx=20)
     cpu_cores_title.pack(pady=10, anchor="w")
     cpu_coreInfo_label.pack(anchor="w")
     
     
     # Memory Package
-    mem_frame.grid(row=1, column=3, sticky="nsew")
+    mem_frame.grid(row=1, column=3, sticky="nsew", pady=20, padx=30)
     mem_title.pack(pady=10, anchor="w")
     mem_total_label.pack(anchor="w")
     mem_avail_label.pack(anchor="w")
     mem_used_label.pack(anchor="w")
     
     
-    # Drive Package
-    drive_frame.grid(row=2, column=1, sticky="nsew")
-    drive_title.pack(pady=10, anchor="w")
-    drive_label.pack(anchor="w")
-    
-    
     # GPU Frame
-    gpu_frame.grid(row=2, column=3, sticky="nsew")
+    gpu_frame.grid(row=2, column=3, sticky="nsew", pady=20, padx=30)
     gpu_title.pack(pady=10, anchor="w")
     gpu_label.pack(anchor="w")
     
     
     # Grid configuration
     for _ in range(3):
-        root.rowconfigure(_, weight=2)
+        root.rowconfigure(_, weight=1)
     for _ in range(4):
-        root.columnconfigure(_, weight=2)
+        root.columnconfigure(_, weight=1)
 
 
     # loop
