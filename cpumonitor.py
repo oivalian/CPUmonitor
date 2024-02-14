@@ -1,10 +1,19 @@
 import multiprocessing
+import threading
 import psutil as ps
 import platform as pl
 import cpuinfo
 import GPUtil
 import ttkbootstrap as ttk
 import os
+
+
+def threader():
+    cpu_threader = threading.Thread(target=cpu_core_list)
+    gpu_threader = threading.Thread(target=gui_updater)
+    cpu_threader.start()
+    gpu_threader.start()
+    root.after(1000, threader)
 
 
 def cpu_core_list():
@@ -52,14 +61,13 @@ def get_gpu_list(gpu_string):
 
 
 def gui_updater():
-    cpu_string = []
+    gpu_string = []
     cpu_coreInfo_var.set("".join(cpu_core_list()))
     cpu_perc_var.set(f"Current CPU usage: {ps.cpu_percent()}%")
-    gpu_string_var.set(get_gpu_list("".join(cpu_string)))
-    root.after(1500, gui_updater)
+    gpu_string_var.set(get_gpu_list("".join(gpu_string)))
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
     # root
     multiprocessing.freeze_support()
     root = ttk.Window(themename="darkly")
@@ -67,8 +75,7 @@ if __name__=="__main__":
     root.iconbitmap("icon.ico")
     root.geometry("")
     root.resizable(False, False)
-    
-    
+
     # content
     # -- System Information Box --
     sys_frame = ttk.Frame(root)
@@ -96,8 +103,7 @@ if __name__=="__main__":
     sys_vers_var = ttk.StringVar()
     sys_vers_var.set(sys_vers)
     sys_vers_label = ttk.Label(sys_frame, textvariable=sys_vers_var, font="Verdana 8")
-    
-    
+
     # -- Memory Box --
     mem_frame = ttk.Frame(root)
     
@@ -124,8 +130,7 @@ if __name__=="__main__":
     mem_used_var = ttk.StringVar()
     mem_used_var.set(mem_used_string)
     mem_used_label = ttk.Label(mem_frame, textvariable=mem_used_var, font="Verdana 8")
-    
-    
+
     # -- Drive Box --
     drive_frame = ttk.Frame(root)
     
@@ -135,7 +140,6 @@ if __name__=="__main__":
     # Drives
     drive_string_var = ttk.StringVar()
     drive_label = ttk.Label(drive_frame, textvariable=drive_string_var, font="Verdana 8")
-    
     
     # -- CPU Information Box --
     cpu_frame = ttk.Frame(root)
@@ -177,19 +181,17 @@ if __name__=="__main__":
     # CPU Cores Usage
     cpu_coreInfo_var = ttk.StringVar()
     cpu_coreInfo_label = ttk.Label(cpu_cores_frame, textvariable=cpu_coreInfo_var, font="Verdana 8")
-    
-    
+
     # -- GPU Information Box --
     gpu_frame = ttk.Frame(root)
     
     # GPU title
     gpu_title = ttk.Label(gpu_frame, text="GPU Information", font="Verdana 12 bold")
     
-    #GPU List
+    # GPU List
     gpu_string_var = ttk.StringVar()
     gpu_label = ttk.Label(gpu_frame, textvariable=gpu_string_var, font="Verdana 8")
-    
-    
+
     # -- PACKAGE --
     # System Information Package
     sys_frame.grid(row=1, column=1, sticky="nsew", pady=20, padx=30)
@@ -198,13 +200,11 @@ if __name__=="__main__":
     sys_osinfo_label.pack(anchor="w")
     sys_vers_label.pack(anchor="w")
 
-    
     # Drive Package
     drive_frame.grid(row=2, column=1, sticky="nsew", pady=20, padx=30)
     drive_title.pack(pady=10, anchor="w")
     drive_label.pack(anchor="w")
 
-    
     # CPU Package
     cpu_frame.grid(row=1, column=2, sticky="nsew", pady=20, padx=20)
     cpu_title.pack(pady=10, anchor="w")
@@ -212,27 +212,23 @@ if __name__=="__main__":
     cpu_speeds_label.pack(anchor="w")
     cpu_perc_label.pack(anchor="w")
     cpu_avail_label.pack(anchor="w")
-    
-    
+
     # CPU Cores Package
     cpu_cores_frame.grid(row=2, column=2, sticky="nsew", pady=20, padx=20)
     cpu_cores_title.pack(pady=10, anchor="w")
     cpu_coreInfo_label.pack(anchor="w")
-    
-    
+
     # Memory Package
     mem_frame.grid(row=1, column=3, sticky="nsew", pady=20, padx=30)
     mem_title.pack(pady=10, anchor="w")
     mem_total_label.pack(anchor="w")
     mem_avail_label.pack(anchor="w")
     mem_used_label.pack(anchor="w")
-    
-    
+
     # GPU Frame
     gpu_frame.grid(row=2, column=3, sticky="nsew", pady=20, padx=30)
     gpu_title.pack(pady=10, anchor="w")
     gpu_label.pack(anchor="w")
-    
     
     # Grid configuration
     for _ in range(3):
@@ -240,8 +236,8 @@ if __name__=="__main__":
     for _ in range(4):
         root.columnconfigure(_, weight=1)
 
-
     # loop
-    gui_updater()
     get_drive_list()
+    gui_updater()
+    threader()
     root.mainloop()
